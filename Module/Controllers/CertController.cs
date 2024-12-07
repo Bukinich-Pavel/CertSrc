@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CertificateLibrary;
 using CertSrc.Types;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
+using Service.Types;
+using Service.QRCoder;
 
 namespace CertSrc.Controllers
 {
     [ApiController]
     [Route("cert/[action]")]
-    public class CertController(Certificate cert) : ControllerBase
+    public class CertController(QRCoderCertificate cert) : ControllerBase
     {
-        readonly Certificate certificate = cert;
+        readonly QRCoderCertificate certificate = cert;
 
         [HttpPost]
         [ActionName(name: "get")]

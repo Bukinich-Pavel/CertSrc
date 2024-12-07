@@ -1,15 +1,14 @@
 ﻿using QRCoder;
 
-namespace CertificateLibrary
+namespace Service.QRCoder
 {
-    public class Certificate
+    public class QRCoderCertificate
     {
         public byte[] GenerateQRCode(string url)
         {
-            if (string.IsNullOrEmpty(url))
-            {
+            if (string.IsNullOrEmpty(url)) 
+                
                 throw new ArgumentException("URL cannot be empty.");
-            }
 
             using var qrGenerator = new QRCodeGenerator();
             using var qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
