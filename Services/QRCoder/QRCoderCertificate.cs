@@ -6,9 +6,7 @@ namespace Service.QRCoder
     {
         public byte[] GenerateQRCode(string url)
         {
-            if (string.IsNullOrEmpty(url)) 
-                
-                throw new ArgumentException("URL cannot be empty.");
+            if (string.IsNullOrEmpty(url)) throw new ArgumentException("URL cannot be empty.");
 
             using var qrGenerator = new QRCodeGenerator();
             using var qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
