@@ -8,7 +8,9 @@ namespace Domain
     {
         public static void ConfigureServicesModule(this IServiceCollection services)
         {
+            services.ConfigureRepositoryModule();
             services.AddScoped<IQRCoderCertificate, QRCoderCertificate>();
+            services.AddScoped<IAuthorization, Authorization>();
         }
     }
 }

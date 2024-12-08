@@ -1,8 +1,7 @@
-namespace Repository.Models
+namespace Domain.Models.Auth
 {
-    public class User
+    public class LoginParams
     {
-        public int Id { get; set; }
         public required string Name { get; set; }
         public required string Password { get; set; }
     }

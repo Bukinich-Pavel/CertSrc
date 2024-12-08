@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Repository.Models;
 
-namespace Repository.data
+namespace Repository.Data
 {
-    public class BookContext : DbContext
+    public class ApplicationContext : DbContext
     {
         public DbSet<User> Users { get; set; }
 
