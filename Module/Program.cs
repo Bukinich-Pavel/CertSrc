@@ -1,11 +1,12 @@
-using Service.QRCoder;
+using Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<QRCoderCertificate>();
+
+builder.Services.ConfigureServicesModule();
 
 var app = builder.Build();
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace CertSrc.Types
+namespace Domain.Types
 {
     public class Token
     {

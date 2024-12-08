@@ -1,40 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CertSrc.Types;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text.Json;
-using Service.Types;
-using Service.QRCoder;
+using Domain.Interfaces;
+using Domain.Models;
 
 namespace CertSrc.Controllers
 {
     [ApiController]
     [Route("cert/[action]")]
-    public class CertController(QRCoderCertificate cert) : ControllerBase
+    public class CertController(IQRCoderCertificate certificate) : ControllerBase
     {
-        readonly QRCoderCertificate certificate = cert;
+        readonly IQRCoderCertificate _certificate = certificate;
 
         [HttpPost]
         [ActionName(name: "get")]
         public IActionResult Get([FromBody] CertFormParams formData)
         {
-            var jwt = new JwtSecurityToken(
-                issuer: Token.NAME_ORG,
-                audience: Token.NAME_CLIENT,
-                //claims: claims,
-                //expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
-                signingCredentials: new SigningCredentials(Token.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-
-            var certFormData = new CertFormData()
-            {
-                Count = formData.Count,
-                Date = formData.Date,
-                JwtToken = new JwtSecurityTokenHandler().WriteToken(jwt)
-            };
-
-            string json = JsonSerializer.Serialize(certFormData);
-
-            var fileBytes = certificate.GenerateQRCode(json);
+            var fileBytes = _certificate.GetCertificate(formData);
             return File(fileBytes, "image/jpeg");
         }
     }
